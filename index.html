@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard — Football Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- Sidebar Overlay (mobile) -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- Bottom Navigation (mobile only) -->
+<nav class="bottom-nav" id="bottomNav">
+  <div class="bottom-nav-inner">
+    <button class="bottom-nav-item active" data-page="dashboard" onclick="navigate('dashboard')">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="bottom-nav-item" data-page="users" onclick="navigate('users')">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      <span>Users</span>
+    </button>
+    <button class="bottom-nav-item" data-page="applications" onclick="navigate('applications')">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
+      <span>Apply</span>
+      <span class="bottom-nav-badge" id="bnApplyBadge">4</span>
+    </button>
+    <button class="bottom-nav-item" data-page="settings" onclick="navigate('settings')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      <span>Settings</span>
+    </button>
+    <button class="bottom-nav-item" data-page="about" onclick="navigate('about')">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>About</span>
+    </button>
+  </div>
+</nav>
+
+<div class="app">
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-icon">
+      <img src="../assets/images/logo.png" alt="Football Tracker Logo">
+    </div>
+    <div class="brand-text">
+      <h1>Football Tracker</h1>
+      <span>Admin Portal</span>
+    </div>
+  </div>
+
+  <div class="admin-badge">
+    <div class="admin-avatar">A</div>
+    <div class="admin-info">
+      <div class="name">Admin User</div>
+      <div class="role">⚡ Super Admin</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">Main</div>
+
+    <a class="nav-item active" href="#" data-page="dashboard">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span class="nav-label">Dashboard</span>
+    </a>
+
+    <div class="nav-section-label">Management</div>
+
+    <a class="nav-item" href="#" data-page="users">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      <span class="nav-label">User Management</span>
+    </a>
+
+    <a class="nav-item" href="#" data-page="applications">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      <span class="nav-label">Role Applications</span>
+      <span class="nav-badge">4</span>
+    </a>
+
+    <div class="nav-section-label">System</div>
+
+    <a class="nav-item" href="#" data-page="settings">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      <span class="nav-label">System Settings</span>
+    </a>
+
+    <a class="nav-item" href="#" data-page="about">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span class="nav-label">About / My Group</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <a href="login.php" class="btn-logout">
+      <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Logout
+    </a>
+  </div>
+</aside>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main-content">
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <button class="topbar-menu-btn" onclick="toggleSidebar()">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+
+    <div class="topbar-breadcrumb">
+      <div class="page-title" id="pageTitle">Dashboard</div>
+      <div class="page-sub" id="pageSub">Overview of your Football Tracker system</div>
+    </div>
+
+    <div class="topbar-actions">
+      <div class="topbar-search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" placeholder="Search...">
+      </div>
+
+      <div class="topbar-icon-btn" id="notifBtn" onclick="toggleNotifications()">
+        <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <span class="notif-dot"></span>
+      </div>
+
+      <div class="topbar-icon-btn" onclick="navigate('settings')">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-content">
+
+    <!-- Notification panel -->
+    <div id="notificationPanel" class="notification-panel">
+      <div class="notification-panel-header">
+        <div>Notifications</div>
+        <button class="btn-link" onclick="document.getElementById('notificationPanel').classList.remove('open')">Close</button>
+      </div>
+      <div id="notificationList" class="notification-list">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- ═══════════════ DASHBOARD PAGE ═══════════════ -->
+    <div class="page active" id="page-dashboard">
+
+      <!-- Stat cards -->
+      <div class="stats-grid">
+        <div class="stat-card blue">
+          <div class="stat-icon blue">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <div class="stat-value">148</div>
+          <div class="stat-label">Total Users</div>
+          <div class="stat-trend up">
+            <svg viewBox="0 0 24 24" width="12" height="12"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            +12 this month
+          </div>
+        </div>
+
+        <div class="stat-card green">
+          <div class="stat-icon green">
+            <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          </div>
+          <div class="stat-value">12</div>
+          <div class="stat-label">Active Tournaments</div>
+          <div class="stat-trend up">
+            <svg viewBox="0 0 24 24" width="12" height="12"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            +3 ongoing
+          </div>
+        </div>
+
+        <div class="stat-card accent">
+          <div class="stat-icon accent">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="stat-value">4</div>
+          <div class="stat-label">Pending Applications</div>
+          <div class="stat-trend neutral">Awaiting review</div>
+        </div>
+
+        <div class="stat-card red">
+          <div class="stat-icon red">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="stat-value">3</div>
+          <div class="stat-label">Suspended Accounts</div>
+          <div class="stat-trend down">Needs attention</div>
+        </div>
+      </div>
+
+      <!-- Dashboard grid -->
+      <div class="dashboard-grid">
+
+        <!-- Recent Activity -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-header-title">Recent Activity</div>
+              <div class="card-header-sub">Latest system events</div>
+            </div>
+            <button class="btn-secondary" style="font-size:12px;padding:7px 14px;" onclick="navigate('applications')">View All</button>
+          </div>
+          <div class="card-body">
+            <div class="activity-list">
+              <div class="activity-item">
+                <div class="activity-dot green">
+                  <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <div class="activity-text">
+                  <strong>New user registered — Maria Santos</strong>
+                  <span>Applied for Coach role • 2 minutes ago</span>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot blue">
+                  <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+                </div>
+                <div class="activity-text">
+                  <strong>Tournament created — Summer League 2025</strong>
+                  <span>By Organizer Juan Cruz • 18 minutes ago</span>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot accent">
+                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg>
+                </div>
+                <div class="activity-text">
+                  <strong>Role application approved — Referee</strong>
+                  <span>Carlos Reyes approved • 1 hour ago</span>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot red">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+                </div>
+                <div class="activity-text">
+                  <strong>Account suspended — Luis Mendoza</strong>
+                  <span>Violation of terms • 3 hours ago</span>
+                </div>
+              </div>
+              <div class="activity-item">
+                <div class="activity-dot purple">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </div>
+                <div class="activity-text">
+                  <strong>System settings updated</strong>
+                  <span>Registration window changed • Yesterday</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div style="display:flex;flex-direction:column;gap:18px;">
+
+          <!-- User Role Breakdown -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-header-title">Users by Role</div>
+                <div class="card-header-sub">Role distribution</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="role-breakdown">
+                <div class="role-bar-item">
+                  <div class="role-bar-label"><span>Players</span><span>82</span></div>
+                  <div class="role-bar-track"><div class="role-bar-fill green" style="width:55%"></div></div>
+                </div>
+                <div class="role-bar-item">
+                  <div class="role-bar-label"><span>Coaches</span><span>31</span></div>
+                  <div class="role-bar-track"><div class="role-bar-fill blue" style="width:21%"></div></div>
+                </div>
+                <div class="role-bar-item">
+                  <div class="role-bar-label"><span>Referees</span><span>18</span></div>
+                  <div class="role-bar-track"><div class="role-bar-fill accent" style="width:12%"></div></div>
+                </div>
+                <div class="role-bar-item">
+                  <div class="role-bar-label"><span>Organizers</span><span>14</span></div>
+                  <div class="role-bar-track"><div class="role-bar-fill purple" style="width:9%"></div></div>
+                </div>
+                <div class="role-bar-item">
+                  <div class="role-bar-label"><span>Admins</span><span>3</span></div>
+                  <div class="role-bar-track"><div class="role-bar-fill red" style="width:2%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pending Applications Quick List -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <div class="card-header-title">Pending Applications</div>
+                <div class="card-header-sub">4 awaiting review</div>
+              </div>
+              <button class="btn-primary" style="font-size:12px;padding:7px 14px;" onclick="navigate('applications')">
+                Review All
+              </button>
+            </div>
+            <div class="card-body" style="padding:0;">
+              <div class="activity-list" style="padding:0 22px;">
+                <div class="activity-item">
+                  <div class="user-avatar" style="background:linear-gradient(135deg,#1a4db5,#2d7de8);border-radius:9px;width:34px;height:34px;font-size:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">M</div>
+                  <div class="activity-text">
+                    <strong>Maria Santos — Coach</strong>
+                    <span>Applied 2 min ago</span>
+                  </div>
+                  <div class="action-btns">
+                    <button class="btn-icon success" onclick="approveApp(this)" title="Approve">
+                      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                    </button>
+                    <button class="btn-icon danger" onclick="rejectApp(this)" title="Reject">
+                      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="user-avatar" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);border-radius:9px;width:34px;height:34px;font-size:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">J</div>
+                  <div class="activity-text">
+                    <strong>Joel Castillo — Referee</strong>
+                    <span>Applied 4 hours ago</span>
+                  </div>
+                  <div class="action-btns">
+                    <button class="btn-icon success" onclick="approveApp(this)" title="Approve">
+                      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                    </button>
+                    <button class="btn-icon danger" onclick="rejectApp(this)" title="Reject">
+                      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ USER MANAGEMENT PAGE ═══════════════ -->
+    <div class="page" id="page-users">
+      <div class="section-header" style="margin-bottom:20px;">
+        <div>
+          <div class="section-title">User Management</div>
+          <div class="section-sub">Manage all registered users and their roles</div>
+        </div>
+        <button class="btn-primary" onclick="openModal('addUserModal')">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add User
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="filters-row" style="margin:0;flex:1;">
+            <div class="search-input-inline">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" placeholder="Search users..." oninput="filterUsers(this.value)">
+            </div>
+            <select class="filter-select" onchange="filterByStatus(this.value)">
+              <option value="">All Status</option>
+              <option value="active">Active</option>
+              <option value="suspended">Suspended</option>
+              <option value="deactivated">Deactivated</option>
+            </select>
+            <select class="filter-select" onchange="filterByRole(this.value)">
+              <option value="">All Roles</option>
+              <option value="Admin">Admin</option>
+              <option value="Organizer">Organizer</option>
+              <option value="Coach">Coach</option>
+              <option value="Referee">Referee</option>
+              <option value="Player">Player</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table id="usersTable">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Joined</th>
+                <th>Last Login</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="usersBody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pagination">
+          <div class="page-info" id="usersPageInfo">Showing 1–10 of 148 users</div>
+          <div class="page-btns">
+            <button class="page-btn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ ROLE APPLICATIONS PAGE ═══════════════ -->
+    <div class="page" id="page-applications">
+      <div class="section-header" style="margin-bottom:20px;">
+        <div>
+          <div class="section-title">Role Applications</div>
+          <div class="section-sub">Review and approve or reject role requests</div>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <span class="badge badge-pending" style="font-size:13px;padding:6px 14px;">4 Pending</span>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div style="display:flex;gap:4px;margin-bottom:20px;background:var(--gray-100);padding:4px;border-radius:11px;width:fit-content;">
+        <button class="tab-btn active" onclick="filterApps('all', this)">All Applications</button>
+        <button class="tab-btn" onclick="filterApps('pending', this)">Pending</button>
+        <button class="tab-btn" onclick="filterApps('approved', this)">Approved</button>
+        <button class="tab-btn" onclick="filterApps('rejected', this)">Rejected</button>
+      </div>
+
+      <div class="applications-grid" id="appsBody">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <!-- ═══════════════ SETTINGS PAGE ═══════════════ -->
+    <div class="page" id="page-settings">
+      <div class="section-header" style="margin-bottom:20px;">
+        <div>
+          <div class="section-title">System Settings</div>
+          <div class="section-sub">Configure platform-wide settings and policies</div>
+        </div>
+        <button class="btn-primary" onclick="saveSettings()">
+          <svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Save Changes
+        </button>
+      </div>
+
+      <!-- Registration Settings -->
+      <div class="card" style="margin-bottom:18px;">
+        <div class="card-header">
+          <div>
+            <div class="card-header-title">Registration & Age Settings</div>
+            <div class="card-header-sub">Control who can register and age restrictions</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="settings-grid">
+            <div class="setting-item">
+              <div class="setting-item-info">
+                <div class="setting-item-label">Open Registration</div>
+                <div class="setting-item-desc">Allow new users to register on the platform</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <div class="setting-item-info">
+                <div class="setting-item-label">Require Email Verification</div>
+                <div class="setting-item-desc">Users must verify their email before accessing the system</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <div class="setting-item-info">
+                <div class="setting-item-label">Minimum Player Age</div>
+                <div class="setting-item-desc">Minimum age for player registration</div>
+              </div>
+              <input class="setting-input" type="number" value="10" min="5" max="25">
+            </div>
+            <div class="setting-item">
+              <div class="setting-item-info">
+                <div class="setting-item-label">Maximum Player Age</div>
+                <div class="setting-item-desc">Maximum age for player registration</div>
+              </div>
+              <input class="setting-input" type="number" value="50" min="10" max="99">
+            </div>
+            <div class="setting-item">
+              <div class="setting-item-info">
+                <div class="setting-item-label">Default Division</div>
+                <div class="setting-item-desc">Default division assigned to new teams</div>
+              </div>
+              <select class="setting-input">
+                <option>Division 1</option>
+                <option>Division 2</option>
+                <option>Division 3</option>
+                <option>Youth</option>
+                <option>Senior</option>
+              </select>
+            </div>
+            <div class="setting-item">
+              <div class="setting-item-info">
+                <div class="setting-item-label">Age Groups</div>
+                <div class="setting-item-desc">Comma-separated list of age group labels</div>
+              </div>
+              <input class="setting-input" type="text" value="U12, U16, U18, Senior">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Platform Settings -->
+      <div class="card" style="margin-bottom:18px;">
+        <div class="card-header">
+          <div>
+            <div class="card-header-title">Platform Settings</div>
+            <div class="card-header-sub">General system configuration</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="settings-grid">
+            <div class="setting-item">
+              <div class="setting-item-info">
+                <div class="setting-item-label">Allow Public View</div>
+                <div class="setting-item-desc">Allow unauthenticated users to view tournaments and matches</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <div class="setting-item-info">
+                <div class="setting-item-label">Enable Match Disputes</div>
+                <div class="setting-item-desc">Allow coaches to dispute match results</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked>
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <div class="setting-item-info">
+                <div class="setting-item-label">System Maintenance Mode</div>
+                <div class="setting-item-desc">Put the system in read-only maintenance mode</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox">
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="setting-item">
+              <div class="setting-item-info">
+                <div class="setting-item-label">Contact Email</div>
+                <div class="setting-item-desc">Official contact email shown on the platform</div>
+              </div>
+              <input class="setting-input" type="email" value="admin@footballtracker.bz">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════ ABOUT PAGE ═══════════════ -->
+    <div class="page" id="page-about">
+      <div class="section-header" style="margin-bottom:20px;">
+        <div>
+          <div class="section-title">About / My Group</div>
+          <div class="section-sub">System information and development team</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+        <div class="card">
+          <div class="card-header"><div class="card-header-title">System Information</div></div>
+          <div class="card-body">
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--gray-100);">
+                <span style="font-size:13.5px;color:var(--gray-500);">System Name</span>
+                <span style="font-size:13.5px;font-weight:700;color:var(--gray-800);">Football Tracker</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--gray-100);">
+                <span style="font-size:13.5px;color:var(--gray-500);">Version</span>
+                <span class="badge badge-active">v1.0.0</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--gray-100);">
+                <span style="font-size:13.5px;color:var(--gray-500);">Database</span>
+                <span style="font-size:13.5px;font-weight:600;color:var(--gray-700);">MySQL / MariaDB</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--gray-100);">
+                <span style="font-size:13.5px;color:var(--gray-500);">Backend</span>
+                <span style="font-size:13.5px;font-weight:600;color:var(--gray-700);">PHP</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;">
+                <span style="font-size:13.5px;color:var(--gray-500);">Frontend</span>
+                <span style="font-size:13.5px;font-weight:600;color:var(--gray-700);">HTML / CSS / JS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header"><div class="card-header-title">Development Team</div></div>
+          <div class="card-body">
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <div class="user-cell">
+                <div class="user-avatar" style="background:linear-gradient(135deg,var(--blue-main),var(--blue-light));width:40px;height:40px;border-radius:10px;">J</div>
+                <div class="user-info">
+                  <div class="uname">JIBYA TECH</div>
+                  <div class="uemail">Development Team</div>
+                </div>
+                <span class="badge badge-admin">Lead</span>
+              </div>
+              <div style="padding:14px;background:var(--gray-50);border-radius:10px;border:1px solid var(--gray-200);">
+                <div style="font-size:13px;color:var(--gray-500);font-style:italic;line-height:1.7;">"Where Champions Connect and Matches Come to Life" — Football Tracker is built to bring together players, coaches, referees and organizers across all communities.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end page-content -->
+</div><!-- end main-content -->
+</div><!-- end app -->
+
+<!-- ═══ MODALS ═══ -->
+
+<!-- Confirmation Modal -->
+<div class="confirm-modal-overlay" id="confirmModalOverlay">
+  <div class="confirm-modal">
+    <div class="confirm-modal-icon" id="confirmModalIcon">
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+        <line x1="12" y1="8" x2="12" y2="12" stroke="currentColor" stroke-width="2"/>
+        <line x1="12" y1="16" x2="12.01" y2="16" stroke="currentColor" stroke-width="2"/>
+      </svg>
+    </div>
+    <h2 class="confirm-modal-title" id="confirmModalTitle">Confirm Action</h2>
+    <p class="confirm-modal-message" id="confirmModalMessage">Are you sure?</p>
+    <div class="confirm-modal-actions">
+      <button class="btn-cancel" id="confirmModalCancel">Cancel</button>
+      <button class="btn-confirm" id="confirmModalOk">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add User Modal -->
+<div class="modal-overlay" id="addUserModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-title">Add New User</div>
+      <button class="modal-close" onclick="closeModal('addUserModal')">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-control-2col">
+        <div class="form-row"><label>Full Name</label><input class="form-control" id="addName" type="text" placeholder="Juan dela Cruz"></div>
+        <div class="form-row"><label>Email Address</label><input class="form-control" id="addEmail" type="email" placeholder="juan@email.com"></div>
+      </div>
+      <div class="form-control-2col">
+        <div class="form-row"><label>Password</label><input class="form-control" id="addPassword" type="password" placeholder="Temporary password"></div>
+        <div class="form-row"><label>Phone Number</label><input class="form-control" id="addPhone" type="tel" placeholder="+501 600-0000"></div>
+      </div>
+      <div class="form-control-2col">
+        <div class="form-row">
+          <label>Assign Role</label>
+          <select class="form-control" id="addRole">
+            <option value="">Select role...</option>
+            <option>Admin</option>
+            <option>Organizer</option>
+            <option>Coach</option>
+            <option>Referee</option>
+            <option>Player</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Account Status</label>
+          <select class="form-control" id="addStatus">
+            <option value="active">Active</option>
+            <option value="suspended">Suspended</option>
+            <option value="deactivated">Deactivated</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('addUserModal')">Cancel</button>
+      <button class="btn-primary" onclick="addUser()">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        Create User
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Edit User Modal -->
+<div class="modal-overlay" id="editUserModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-title">Edit User</div>
+      <button class="modal-close" onclick="closeModal('editUserModal')">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="form-control-2col">
+        <div class="form-row"><label>Full Name</label><input class="form-control" id="editName" type="text"></div>
+        <div class="form-row"><label>Email</label><input class="form-control" id="editEmail" type="email"></div>
+      </div>
+      <div class="form-control-2col">
+        <div class="form-row">
+          <label>Role</label>
+          <select class="form-control" id="editRole">
+            <option>Admin</option><option>Organizer</option><option>Coach</option><option>Referee</option><option>Player</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Status</label>
+          <select class="form-control" id="editStatus">
+            <option value="active">Active</option>
+            <option value="suspended">Suspended</option>
+            <option value="deactivated">Deactivated</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Reset Password (leave blank to keep current)</label>
+        <input class="form-control" type="password" placeholder="New password...">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('editUserModal')">Cancel</button>
+      <button class="btn-primary" onclick="saveUser()">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        Save Changes
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- App Review Modal -->
+<div class="modal-overlay" id="reviewAppModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-title">Review Application</div>
+      <button class="modal-close" onclick="closeModal('reviewAppModal')">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div style="background:var(--gray-50);border-radius:10px;padding:16px;border:1px solid var(--gray-200);margin-bottom:16px;">
+        <div class="user-cell" style="margin-bottom:10px;">
+          <div class="user-avatar" id="reviewAvatar" style="background:linear-gradient(135deg,var(--blue-main),var(--blue-light));border-radius:9px;width:40px;height:40px;font-size:15px;"></div>
+          <div class="user-info">
+            <div class="uname" id="reviewName">—</div>
+            <div class="uemail" id="reviewEmail">—</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <span style="font-size:13px;color:var(--gray-500);">Requested Role:</span>
+          <span class="badge badge-pending" id="reviewRole">—</span>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>Admin Notes</label>
+        <textarea class="form-control" id="reviewNotes" rows="3" placeholder="Add notes (optional)..." style="resize:vertical;"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('reviewAppModal')">Cancel</button>
+      <button class="btn-primary" style="background:linear-gradient(135deg,#ef4444,#f97316);" onclick="submitReview('rejected')">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        Reject
+      </button>
+      <button class="btn-primary" onclick="submitReview('approved')">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        Approve
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="js/script.js"></script>
+</body>
+</html>
