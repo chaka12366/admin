@@ -3,43 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Dashboard — Football Tracker</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<title>Organizer Dashboard — Football Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style">
 </head>
 <body>
+
 <div class="toast-container" id="toastContainer"></div>
-
-<!-- Sidebar Overlay (mobile) -->
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
-
-<!-- Bottom Navigation (mobile only) -->
-<nav class="bottom-nav" id="bottomNav">
-  <div class="bottom-nav-inner">
-    <button class="bottom-nav-item active" data-page="dashboard" onclick="navigate('dashboard')">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      <span>Home</span>
-    </button>
-    <button class="bottom-nav-item" data-page="users" onclick="navigate('users')">
-      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-      <span>Users</span>
-    </button>
-    <button class="bottom-nav-item" data-page="applications" onclick="navigate('applications')">
-      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg>
-      <span>Apply</span>
-      <span class="bottom-nav-badge" id="bnApplyBadge">4</span>
-    </button>
-    <button class="bottom-nav-item" data-page="settings" onclick="navigate('settings')">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-      <span>Settings</span>
-    </button>
-    <button class="bottom-nav-item" data-page="about" onclick="navigate('about')">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      <span>About</span>
-    </button>
-  </div>
-</nav>
 
 <div class="app">
 
@@ -47,61 +18,68 @@
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-brand">
     <div class="brand-icon">
-      <img src="../assets/images/logo.png" alt="Football Tracker Logo">
+      <img src="../assets/images/futlogo.png" alt="Football Tracker Logo">
     </div>
     <div class="brand-text">
-      <h1>Football Tracker</h1>
-      <span>Admin Portal</span>
+      <h1>Futgo</h1>
+      <span>Organizer Portal</span>
     </div>
   </div>
 
-  <div class="admin-badge">
-    <div class="admin-avatar">A</div>
-    <div class="admin-info">
-      <div class="name">Admin User</div>
-      <div class="role">⚡ Super Admin</div>
+  <div class="user-badge">
+    <div class="user-avatar-sidebar" id="orgAvatar">OR</div>
+    <div class="user-info-sidebar">
+      <div class="name" id="orgName">Organizer</div>
+      <div class="role" id="orgRole">Organizer</div>
     </div>
   </div>
 
   <nav class="sidebar-nav">
     <div class="nav-section-label">Main</div>
-
     <a class="nav-item active" href="#" data-page="dashboard">
       <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
       <span class="nav-label">Dashboard</span>
     </a>
 
-    <div class="nav-section-label">Management</div>
-
-    <a class="nav-item" href="#" data-page="users">
+    <div class="nav-section-label">Tournament</div>
+    <a class="nav-item" href="#" data-page="tournaments">
+      <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="nav-label">My Tournaments</span>
+    </a>
+    <a class="nav-item" href="#" data-page="enrollment">
       <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-      <span class="nav-label">User Management</span>
+      <span class="nav-label">Team Enrollment</span>
+      <span class="nav-badge" id="orgEnrollmentBadge"></span>
+    </a>
+    <a class="nav-item" href="#" data-page="schedule">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span class="nav-label">Match Schedule</span>
+    </a>
+    <a class="nav-item" href="#" data-page="managers">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      <span class="nav-label">Tournament Managers</span>
     </a>
 
-    <a class="nav-item" href="#" data-page="applications">
-      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-      <span class="nav-label">Role Applications</span>
-      <span class="nav-badge">4</span>
+    <div class="nav-section-label">Results</div>
+    <a class="nav-item" href="#" data-page="results">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <span class="nav-label">Match Results</span>
     </a>
-
-    <div class="nav-section-label">System</div>
-
-    <a class="nav-item" href="#" data-page="settings">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-      <span class="nav-label">System Settings</span>
+    <a class="nav-item" href="#" data-page="standings">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <span class="nav-label">Standings</span>
     </a>
-
-    <a class="nav-item" href="#" data-page="about">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      <span class="nav-label">About / My Group</span>
+    <a class="nav-item" href="#" data-page="bracket">
+      <svg viewBox="0 0 24 24"><path d="M12 2l2.4 4.9 5.4.8-3.9 3.8.9 5.4L12 14.4l-4.8 2.5.9-5.4L4.2 7.7l5.4-.8z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="nav-label">Bracket</span>
     </a>
   </nav>
 
   <div class="sidebar-footer">
-    <a href="login.php" class="btn-logout">
+    <button class="btn-logout" onclick="logoutUser()">
       <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
-      Logout
-    </a>
+      <span>Logout</span>
+    </button>
   </div>
 </aside>
 
@@ -113,25 +91,18 @@
     <button class="topbar-menu-btn" onclick="toggleSidebar()">
       <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
-
     <div class="topbar-breadcrumb">
       <div class="page-title" id="pageTitle">Dashboard</div>
-      <div class="page-sub" id="pageSub">Overview of your Football Tracker system</div>
+      <div class="page-sub" id="pageSub">Overview of your tournaments</div>
     </div>
-
     <div class="topbar-actions">
       <div class="topbar-search">
         <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" placeholder="Search...">
       </div>
-
       <div class="topbar-icon-btn" id="notifBtn" onclick="toggleNotifications()">
         <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
         <span class="notif-dot"></span>
-      </div>
-
-      <div class="topbar-icon-btn" onclick="navigate('settings')">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
       </div>
     </div>
   </header>
@@ -144,491 +115,315 @@
         <div>Notifications</div>
         <button class="btn-link" onclick="document.getElementById('notificationPanel').classList.remove('open')">Close</button>
       </div>
-      <div id="notificationList" class="notification-list">
-        <!-- Populated by JS -->
-      </div>
+      <div id="notificationList" class="notification-list"></div>
     </div>
 
-    <!-- ═══════════════ DASHBOARD PAGE ═══════════════ -->
+    <!-- ═══ DASHBOARD ═══ -->
     <div class="page active" id="page-dashboard">
-
-      <!-- Stat cards -->
-      <div class="stats-grid">
+      <!-- Mobile stats -->
+      <div class="stats-scroll-wrap" id="mobileStats">
         <div class="stat-card blue">
-          <div class="stat-icon blue">
-            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-          </div>
-          <div class="stat-value">148</div>
-          <div class="stat-label">Total Users</div>
-          <div class="stat-trend up">
-            <svg viewBox="0 0 24 24" width="12" height="12"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-            +12 this month
-          </div>
+          <div class="stat-icon blue"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></div>
+          <div class="stat-value">0</div><div class="stat-label">Tournaments</div>
+          <div class="stat-trend neutral">Total created</div>
         </div>
-
         <div class="stat-card green">
-          <div class="stat-icon green">
-            <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          </div>
-          <div class="stat-value">12</div>
-          <div class="stat-label">Active Tournaments</div>
-          <div class="stat-trend up">
-            <svg viewBox="0 0 24 24" width="12" height="12"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-            +3 ongoing
-          </div>
+          <div class="stat-icon green"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+          <div class="stat-value">0</div><div class="stat-label">Enrolled Teams</div>
+          <div class="stat-trend neutral">Approved</div>
         </div>
-
         <div class="stat-card accent">
-          <div class="stat-icon accent">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          </div>
-          <div class="stat-value">4</div>
-          <div class="stat-label">Pending Applications</div>
-          <div class="stat-trend neutral">Awaiting review</div>
+          <div class="stat-icon accent"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div class="stat-value">0</div><div class="stat-label">Matches This Week</div>
+          <div class="stat-trend up"><svg viewBox="0 0 24 24" width="12" height="12"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Scheduled</div>
         </div>
-
-        <div class="stat-card red">
-          <div class="stat-icon red">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          </div>
-          <div class="stat-value">3</div>
-          <div class="stat-label">Suspended Accounts</div>
-          <div class="stat-trend down">Needs attention</div>
+        <div class="stat-card purple">
+          <div class="stat-icon purple"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+          <div class="stat-value">0</div><div class="stat-label">Pending</div>
+          <div class="stat-trend neutral">Needs review</div>
         </div>
       </div>
 
-      <!-- Dashboard grid -->
-      <div class="dashboard-grid">
+      <!-- Desktop stats -->
+      <div class="stats-grid">
+        <div class="stat-card blue">
+          <div class="stat-icon blue"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg></div>
+          <div class="stat-value">0</div><div class="stat-label">My Tournaments</div>
+          <div class="stat-trend up"><svg viewBox="0 0 24 24" width="12" height="12"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Active</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-icon green"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <div class="stat-value">0</div><div class="stat-label">Enrolled Teams</div>
+          <div class="stat-trend neutral">Across all tournaments</div>
+        </div>
+        <div class="stat-card accent">
+          <div class="stat-icon accent"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div class="stat-value">0</div><div class="stat-label">Matches This Week</div>
+          <div class="stat-trend up"><svg viewBox="0 0 24 24" width="12" height="12"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>Scheduled</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-icon purple"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/></svg></div>
+          <div class="stat-value">0</div><div class="stat-label">Pending Enrollments</div>
+          <div class="stat-trend neutral">Needs review</div>
+        </div>
+      </div>
 
-        <!-- Recent Activity -->
+      <div class="dashboard-grid">
         <div class="card">
           <div class="card-header">
             <div>
-              <div class="card-header-title">Recent Activity</div>
-              <div class="card-header-sub">Latest system events</div>
+              <div class="card-header-title">Upcoming Matches</div>
+              <div class="card-header-sub" id="dashMatchesSub">No matches scheduled</div>
             </div>
-            <button class="btn-secondary" style="font-size:12px;padding:7px 14px;" onclick="navigate('applications')">View All</button>
+            <button class="btn-secondary" style="font-size:12px;padding:7px 14px;" onclick="navigate('schedule')">View All</button>
           </div>
-          <div class="card-body">
-            <div class="activity-list">
-              <div class="activity-item">
-                <div class="activity-dot green">
-                  <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                </div>
-                <div class="activity-text">
-                  <strong>New user registered — Maria Santos</strong>
-                  <span>Applied for Coach role • 2 minutes ago</span>
-                </div>
-              </div>
-              <div class="activity-item">
-                <div class="activity-dot blue">
-                  <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
-                </div>
-                <div class="activity-text">
-                  <strong>Tournament created — Summer League 2025</strong>
-                  <span>By Organizer Juan Cruz • 18 minutes ago</span>
-                </div>
-              </div>
-              <div class="activity-item">
-                <div class="activity-dot accent">
-                  <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg>
-                </div>
-                <div class="activity-text">
-                  <strong>Role application approved — Referee</strong>
-                  <span>Carlos Reyes approved • 1 hour ago</span>
-                </div>
-              </div>
-              <div class="activity-item">
-                <div class="activity-dot red">
-                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
-                </div>
-                <div class="activity-text">
-                  <strong>Account suspended — Luis Mendoza</strong>
-                  <span>Violation of terms • 3 hours ago</span>
-                </div>
-              </div>
-              <div class="activity-item">
-                <div class="activity-dot purple">
-                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                </div>
-                <div class="activity-text">
-                  <strong>System settings updated</strong>
-                  <span>Registration window changed • Yesterday</span>
-                </div>
-              </div>
-            </div>
+          <div class="card-body" style="padding:0;">
+            <div class="match-list" style="padding:16px;gap:10px;" id="dashMatchList"></div>
+            <div class="mobile-cards" style="padding:12px;" id="dashMatchCards"></div>
           </div>
         </div>
 
-        <!-- Right column -->
-        <div style="display:flex;flex-direction:column;gap:18px;">
-
-          <!-- User Role Breakdown -->
-          <div class="card">
-            <div class="card-header">
-              <div>
-                <div class="card-header-title">Users by Role</div>
-                <div class="card-header-sub">Role distribution</div>
-              </div>
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-header-title">Pending Enrollments</div>
+              <div class="card-header-sub" id="dashEnrollSub">All reviewed</div>
             </div>
-            <div class="card-body">
-              <div class="role-breakdown">
-                <div class="role-bar-item">
-                  <div class="role-bar-label"><span>Players</span><span>82</span></div>
-                  <div class="role-bar-track"><div class="role-bar-fill green" style="width:55%"></div></div>
-                </div>
-                <div class="role-bar-item">
-                  <div class="role-bar-label"><span>Coaches</span><span>31</span></div>
-                  <div class="role-bar-track"><div class="role-bar-fill blue" style="width:21%"></div></div>
-                </div>
-                <div class="role-bar-item">
-                  <div class="role-bar-label"><span>Referees</span><span>18</span></div>
-                  <div class="role-bar-track"><div class="role-bar-fill accent" style="width:12%"></div></div>
-                </div>
-                <div class="role-bar-item">
-                  <div class="role-bar-label"><span>Organizers</span><span>14</span></div>
-                  <div class="role-bar-track"><div class="role-bar-fill purple" style="width:9%"></div></div>
-                </div>
-                <div class="role-bar-item">
-                  <div class="role-bar-label"><span>Admins</span><span>3</span></div>
-                  <div class="role-bar-track"><div class="role-bar-fill red" style="width:2%"></div></div>
-                </div>
-              </div>
-            </div>
+            <button class="btn-primary" style="font-size:12px;padding:7px 14px;" onclick="navigate('enrollment')">Review All</button>
           </div>
-
-          <!-- Pending Applications Quick List -->
-          <div class="card">
-            <div class="card-header">
-              <div>
-                <div class="card-header-title">Pending Applications</div>
-                <div class="card-header-sub">4 awaiting review</div>
-              </div>
-              <button class="btn-primary" style="font-size:12px;padding:7px 14px;" onclick="navigate('applications')">
-                Review All
-              </button>
-            </div>
-            <div class="card-body" style="padding:0;">
-              <div class="activity-list" style="padding:0 22px;">
-                <div class="activity-item">
-                  <div class="user-avatar" style="background:linear-gradient(135deg,#1a4db5,#2d7de8);border-radius:9px;width:34px;height:34px;font-size:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">M</div>
-                  <div class="activity-text">
-                    <strong>Maria Santos — Coach</strong>
-                    <span>Applied 2 min ago</span>
-                  </div>
-                  <div class="action-btns">
-                    <button class="btn-icon success" onclick="approveApp(this)" title="Approve">
-                      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                    </button>
-                    <button class="btn-icon danger" onclick="rejectApp(this)" title="Reject">
-                      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    </button>
-                  </div>
-                </div>
-                <div class="activity-item">
-                  <div class="user-avatar" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);border-radius:9px;width:34px;height:34px;font-size:13px;flex-shrink:0;display:flex;align-items:center;justify-content:center;">J</div>
-                  <div class="activity-text">
-                    <strong>Joel Castillo — Referee</strong>
-                    <span>Applied 4 hours ago</span>
-                  </div>
-                  <div class="action-btns">
-                    <button class="btn-icon success" onclick="approveApp(this)" title="Approve">
-                      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                    </button>
-                    <button class="btn-icon danger" onclick="rejectApp(this)" title="Reject">
-                      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div class="card-body" style="padding:12px;">
+            <div id="dashEnrollList"></div>
           </div>
-
         </div>
       </div>
     </div>
 
-    <!-- ═══════════════ USER MANAGEMENT PAGE ═══════════════ -->
-    <div class="page" id="page-users">
-      <div class="section-header" style="margin-bottom:20px;">
+    <!-- ═══ MY TOURNAMENTS ═══ -->
+    <div class="page" id="page-tournaments">
+      <div class="section-header">
         <div>
-          <div class="section-title">User Management</div>
-          <div class="section-sub">Manage all registered users and their roles</div>
+          <div class="section-title">My Tournaments</div>
+          <div class="section-sub">Create and manage your tournaments</div>
         </div>
-        <button class="btn-primary" onclick="openModal('addUserModal')">
+        <button class="btn-primary" onclick="openCreateTournament()">
           <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-          Add User
+          New Tournament
         </button>
+      </div>
+
+      <div class="tabs-wrap" style="margin-bottom:18px;">
+        <button class="tab-btn active" onclick="filterTournaments('all', this)">All</button>
+        <button class="tab-btn" onclick="filterTournaments('ongoing', this)">Ongoing</button>
+        <button class="tab-btn" onclick="filterTournaments('upcoming', this)">Upcoming</button>
+        <button class="tab-btn" onclick="filterTournaments('completed', this)">Completed</button>
+      </div>
+
+      <div class="tournament-grid" id="tournamentGrid"></div>
+    </div>
+
+    <!-- ═══ TEAM ENROLLMENT ═══ -->
+    <div class="page" id="page-enrollment">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Team Enrollment</div>
+          <div class="section-sub">Review team enrollment requests per tournament</div>
+        </div>
+        <select class="filter-select" id="enrollmentTournamentFilter" onchange="filterEnrollments()">
+          <option value="">All Tournaments</option>
+        </select>
+      </div>
+
+      <div class="card" style="margin-bottom:18px;">
+        <div class="card-header">
+          <div>
+            <div class="card-header-title">Pending Requests</div>
+            <div class="card-header-sub">0 teams awaiting decision</div>
+          </div>
+          <span class="badge badge-pending">0 Pending</span>
+        </div>
+        <div class="enrollment-list" style="padding:16px;" id="pendingEnrollList"></div>
+        <div class="mobile-cards" style="padding:12px;" id="pendingEnrollCards"></div>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <div class="filters-row" style="margin:0;flex:1;">
-            <div class="search-input-inline">
-              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-              <input type="text" placeholder="Search users..." oninput="filterUsers(this.value)">
-            </div>
-            <select class="filter-select" onchange="filterByStatus(this.value)">
-              <option value="">All Status</option>
-              <option value="active">Active</option>
-              <option value="suspended">Suspended</option>
-              <option value="deactivated">Deactivated</option>
-            </select>
-            <select class="filter-select" onchange="filterByRole(this.value)">
-              <option value="">All Roles</option>
-              <option value="Admin">Admin</option>
-              <option value="Organizer">Organizer</option>
-              <option value="Coach">Coach</option>
-              <option value="Referee">Referee</option>
-              <option value="Player">Player</option>
-            </select>
+          <div><div class="card-header-title">All Enrollment Requests</div></div>
+          <div class="tabs-wrap" style="margin:0;">
+            <button class="tab-btn active" onclick="filterEnrollTab('all', this)">All</button>
+            <button class="tab-btn" onclick="filterEnrollTab('approved', this)">Approved</button>
+            <button class="tab-btn" onclick="filterEnrollTab('rejected', this)">Rejected</button>
           </div>
         </div>
-
         <div class="table-wrap">
-          <table id="usersTable">
+          <table>
             <thead>
-              <tr>
-                <th>User</th>
-                <th>Role</th>
-                <th>Status</th>
-                <th>Joined</th>
-                <th>Last Login</th>
-                <th>Actions</th>
-              </tr>
+              <tr><th>Team</th><th>Tournament</th><th>Division</th><th>Submitted</th><th>Status</th><th>Actions</th></tr>
             </thead>
-            <tbody id="usersBody">
-              <!-- Populated by JS -->
-            </tbody>
+            <tbody id="enrollTableBody"></tbody>
           </table>
         </div>
-
-        <div class="pagination">
-          <div class="page-info" id="usersPageInfo">Showing 1–10 of 148 users</div>
-          <div class="page-btns">
-            <button class="page-btn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
-            <button class="page-btn active">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <button class="page-btn"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
-          </div>
-        </div>
+        <div class="mobile-cards" style="padding:12px;" id="enrollAllCards"></div>
       </div>
     </div>
 
-    <!-- ═══════════════ ROLE APPLICATIONS PAGE ═══════════════ -->
-    <div class="page" id="page-applications">
-      <div class="section-header" style="margin-bottom:20px;">
+    <!-- ═══ MATCH SCHEDULE ═══ -->
+    <div class="page" id="page-schedule">
+      <div class="section-header">
         <div>
-          <div class="section-title">Role Applications</div>
-          <div class="section-sub">Review and approve or reject role requests</div>
+          <div class="section-title">Match Schedule</div>
+          <div class="section-sub">Schedule and manage all matches</div>
         </div>
-        <div style="display:flex;gap:10px;align-items:center;">
-          <span class="badge badge-pending" style="font-size:13px;padding:6px 14px;">4 Pending</span>
-        </div>
-      </div>
-
-      <!-- Tabs -->
-      <div style="display:flex;gap:4px;margin-bottom:20px;background:var(--gray-100);padding:4px;border-radius:11px;width:fit-content;">
-        <button class="tab-btn active" onclick="filterApps('all', this)">All Applications</button>
-        <button class="tab-btn" onclick="filterApps('pending', this)">Pending</button>
-        <button class="tab-btn" onclick="filterApps('approved', this)">Approved</button>
-        <button class="tab-btn" onclick="filterApps('rejected', this)">Rejected</button>
-      </div>
-
-      <div class="applications-grid" id="appsBody">
-        <!-- Populated by JS -->
-      </div>
-    </div>
-
-    <!-- ═══════════════ SETTINGS PAGE ═══════════════ -->
-    <div class="page" id="page-settings">
-      <div class="section-header" style="margin-bottom:20px;">
-        <div>
-          <div class="section-title">System Settings</div>
-          <div class="section-sub">Configure platform-wide settings and policies</div>
-        </div>
-        <button class="btn-primary" onclick="saveSettings()">
-          <svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-          Save Changes
+        <button class="btn-primary" onclick="openScheduleMatch()">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Schedule Match
         </button>
       </div>
 
-      <!-- Registration Settings -->
-      <div class="card" style="margin-bottom:18px;">
+      <div class="card" style="margin-bottom:16px;">
         <div class="card-header">
-          <div>
-            <div class="card-header-title">Registration & Age Settings</div>
-            <div class="card-header-sub">Control who can register and age restrictions</div>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="settings-grid">
-            <div class="setting-item">
-              <div class="setting-item-info">
-                <div class="setting-item-label">Open Registration</div>
-                <div class="setting-item-desc">Allow new users to register on the platform</div>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox" checked>
-                <span class="toggle-slider"></span>
-              </label>
+          <div class="filters-row" style="flex:1;margin:0;">
+            <div class="search-input-inline">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" placeholder="Search matches..." oninput="filterScheduleSearch(this.value)">
             </div>
-            <div class="setting-item">
-              <div class="setting-item-info">
-                <div class="setting-item-label">Require Email Verification</div>
-                <div class="setting-item-desc">Users must verify their email before accessing the system</div>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox" checked>
-                <span class="toggle-slider"></span>
-              </label>
-            </div>
-            <div class="setting-item">
-              <div class="setting-item-info">
-                <div class="setting-item-label">Minimum Player Age</div>
-                <div class="setting-item-desc">Minimum age for player registration</div>
-              </div>
-              <input class="setting-input" type="number" value="10" min="5" max="25">
-            </div>
-            <div class="setting-item">
-              <div class="setting-item-info">
-                <div class="setting-item-label">Maximum Player Age</div>
-                <div class="setting-item-desc">Maximum age for player registration</div>
-              </div>
-              <input class="setting-input" type="number" value="50" min="10" max="99">
-            </div>
-            <div class="setting-item">
-              <div class="setting-item-info">
-                <div class="setting-item-label">Default Division</div>
-                <div class="setting-item-desc">Default division assigned to new teams</div>
-              </div>
-              <select class="setting-input">
-                <option>Division 1</option>
-                <option>Division 2</option>
-                <option>Division 3</option>
-                <option>Youth</option>
-                <option>Senior</option>
-              </select>
-            </div>
-            <div class="setting-item">
-              <div class="setting-item-info">
-                <div class="setting-item-label">Age Groups</div>
-                <div class="setting-item-desc">Comma-separated list of age group labels</div>
-              </div>
-              <input class="setting-input" type="text" value="U12, U16, U18, Senior">
-            </div>
+            <select class="filter-select" id="scheduleMatchFilterTournament" onchange="filterScheduleByTournament(this.value)">
+              <option value="">All Tournaments</option>
+            </select>
+            <select class="filter-select" onchange="filterMatchStatus(this.value)">
+              <option value="">All Status</option>
+              <option value="scheduled">Scheduled</option>
+              <option value="played">Played</option>
+              <option value="confirmed">Confirmed</option>
+              <option value="disputed">Disputed</option>
+            </select>
           </div>
         </div>
       </div>
 
-      <!-- Platform Settings -->
-      <div class="card" style="margin-bottom:18px;">
+      <div class="match-list" id="scheduleMatchList"></div>
+      <div class="mobile-cards" id="scheduleMatchCards"></div>
+    </div>
+
+    <!-- ═══ TOURNAMENT MANAGERS ═══ -->
+    <div class="page" id="page-managers">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Tournament Managers</div>
+          <div class="section-sub">Create accounts and assign managers to your tournaments</div>
+        </div>
+        <button class="btn-primary" onclick="openCreateManager()">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Tournament Manager
+        </button>
+      </div>
+
+      <div class="card" style="margin-bottom:16px;">
+        <div class="card-header">
+          <div class="card-header-title">Filter by Tournament</div>
+          <select class="filter-select" id="managerTournamentFilter" onchange="loadManagers()">
+            <option value="">All Tournaments</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
         <div class="card-header">
           <div>
-            <div class="card-header-title">Platform Settings</div>
-            <div class="card-header-sub">General system configuration</div>
+            <div class="card-header-title">Assigned Managers</div>
+            <div class="card-header-sub" id="managerCount">0 managers assigned</div>
           </div>
         </div>
-        <div class="card-body">
-          <div class="settings-grid">
-            <div class="setting-item">
-              <div class="setting-item-info">
-                <div class="setting-item-label">Allow Public View</div>
-                <div class="setting-item-desc">Allow unauthenticated users to view tournaments and matches</div>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox" checked>
-                <span class="toggle-slider"></span>
-              </label>
-            </div>
-            <div class="setting-item">
-              <div class="setting-item-info">
-                <div class="setting-item-label">Enable Match Disputes</div>
-                <div class="setting-item-desc">Allow coaches to dispute match results</div>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox" checked>
-                <span class="toggle-slider"></span>
-              </label>
-            </div>
-            <div class="setting-item">
-              <div class="setting-item-info">
-                <div class="setting-item-label">System Maintenance Mode</div>
-                <div class="setting-item-desc">Put the system in read-only maintenance mode</div>
-              </div>
-              <label class="toggle-switch">
-                <input type="checkbox">
-                <span class="toggle-slider"></span>
-              </label>
-            </div>
-            <div class="setting-item">
-              <div class="setting-item-info">
-                <div class="setting-item-label">Contact Email</div>
-                <div class="setting-item-desc">Official contact email shown on the platform</div>
-              </div>
-              <input class="setting-input" type="email" value="admin@footballtracker.bz">
-            </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Manager</th><th>Email</th><th>Tournament</th><th>Assigned</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="managersTableBody"></tbody>
+          </table>
+        </div>
+        <div class="mobile-cards" style="padding:12px;" id="managersMobileCards"></div>
+      </div>
+    </div>
+
+    <!-- ═══ MATCH RESULTS ═══ -->
+    <div class="page" id="page-results">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Match Results Review</div>
+          <div class="section-sub">Monitor match results across your tournaments</div>
+        </div>
+      </div>
+
+      <div class="tabs-wrap">
+        <button class="tab-btn active" onclick="filterResults('all', this)">All Results</button>
+        <button class="tab-btn" onclick="filterResults('played', this)">Submitted</button>
+        <button class="tab-btn" onclick="filterResults('confirmed', this)">Confirmed</button>
+        <button class="tab-btn" onclick="filterResults('disputed', this)">Disputed</button>
+      </div>
+
+      <div class="card">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Match</th><th>Score</th><th>Referee</th><th>Date</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="resultsBody"></tbody>
+          </table>
+        </div>
+        <div class="mobile-cards" style="padding:12px;" id="resultsMobileCards"></div>
+      </div>
+    </div>
+
+    <!-- ═══ STANDINGS ═══ -->
+    <div class="page" id="page-standings">
+      <div class="section-header">
+        <div>
+          <div class="section-title">Standings &amp; Leaderboard</div>
+          <div class="section-sub">Live tournament standings</div>
+        </div>
+        <select class="filter-select" id="standingsTournamentSelect">
+          <option value="">— Select Tournament —</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-header-title" id="standingsTitleHeader">Select a tournament</div>
+            <div class="card-header-sub" id="standingSubHeader"></div>
           </div>
+          <button class="btn-secondary" style="font-size:12px;padding:7px 14px;" onclick="exportStandings()">
+            <svg viewBox="0 0 24 24" width="14" height="14" style="stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export CSV
+          </button>
+        </div>
+        <div class="table-wrap">
+          <table class="standings-table">
+            <thead>
+              <tr><th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>PTS</th></tr>
+            </thead>
+            <tbody id="standingsBody"></tbody>
+          </table>
         </div>
       </div>
     </div>
 
-    <!-- ═══════════════ ABOUT PAGE ═══════════════ -->
-    <div class="page" id="page-about">
-      <div class="section-header" style="margin-bottom:20px;">
+    <!-- ═══ BRACKET ═══ -->
+    <div class="page" id="page-bracket">
+      <div class="section-header">
         <div>
-          <div class="section-title">About / My Group</div>
-          <div class="section-sub">System information and development team</div>
+          <div class="section-title">Tournament Bracket</div>
+          <div class="section-sub">Knockout elimination draws &amp; results</div>
         </div>
+        <select class="filter-select" id="bracketTournamentSelect" onchange="loadBracket(this.value)">
+          <option value="">— Select Tournament —</option>
+        </select>
       </div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
-        <div class="card">
-          <div class="card-header"><div class="card-header-title">System Information</div></div>
-          <div class="card-body">
-            <div style="display:flex;flex-direction:column;gap:14px;">
-              <div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--gray-100);">
-                <span style="font-size:13.5px;color:var(--gray-500);">System Name</span>
-                <span style="font-size:13.5px;font-weight:700;color:var(--gray-800);">Football Tracker</span>
-              </div>
-              <div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--gray-100);">
-                <span style="font-size:13.5px;color:var(--gray-500);">Version</span>
-                <span class="badge badge-active">v1.0.0</span>
-              </div>
-              <div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--gray-100);">
-                <span style="font-size:13.5px;color:var(--gray-500);">Database</span>
-                <span style="font-size:13.5px;font-weight:600;color:var(--gray-700);">MySQL / MariaDB</span>
-              </div>
-              <div style="display:flex;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--gray-100);">
-                <span style="font-size:13.5px;color:var(--gray-500);">Backend</span>
-                <span style="font-size:13.5px;font-weight:600;color:var(--gray-700);">PHP</span>
-              </div>
-              <div style="display:flex;justify-content:space-between;">
-                <span style="font-size:13.5px;color:var(--gray-500);">Frontend</span>
-                <span style="font-size:13.5px;font-weight:600;color:var(--gray-700);">HTML / CSS / JS</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-header"><div class="card-header-title">Development Team</div></div>
-          <div class="card-body">
-            <div style="display:flex;flex-direction:column;gap:14px;">
-              <div class="user-cell">
-                <div class="user-avatar" style="background:linear-gradient(135deg,var(--blue-main),var(--blue-light));width:40px;height:40px;border-radius:10px;">J</div>
-                <div class="user-info">
-                  <div class="uname">JIBYA TECH</div>
-                  <div class="uemail">Development Team</div>
-                </div>
-                <span class="badge badge-admin">Lead</span>
-              </div>
-              <div style="padding:14px;background:var(--gray-50);border-radius:10px;border:1px solid var(--gray-200);">
-                <div style="font-size:13px;color:var(--gray-500);font-style:italic;line-height:1.7;">"Where Champions Connect and Matches Come to Life" — Football Tracker is built to bring together players, coaches, referees and organizers across all communities.</div>
-              </div>
-            </div>
-          </div>
+      <div id="bracketContent">
+        <div style="text-align:center;padding:60px 20px;color:var(--gray-400);">
+          <svg viewBox="0 0 24 24" width="52" height="52" style="stroke:currentColor;fill:none;stroke-width:1.5;opacity:0.25;display:block;margin:0 auto 14px;"><path d="M6 9H3v6h3"/><path d="M18 9h3v6h-3"/><line x1="6" y1="12" x2="18" y2="12"/><circle cx="6" cy="12" r="2"/><circle cx="18" cy="12" r="2"/></svg>
+          <div style="font-size:16px;font-weight:600;color:var(--gray-600);margin-bottom:6px;">Select a knockout tournament</div>
+          <div style="font-size:13px;">Only tournaments created with Knockout format appear here.</div>
         </div>
       </div>
     </div>
@@ -637,115 +432,164 @@
 </div><!-- end main-content -->
 </div><!-- end app -->
 
-<!-- ═══ MODALS ═══ -->
+<!-- ═══════════ MODALS ═══════════ -->
 
-<!-- Confirmation Modal -->
-<div class="confirm-modal-overlay" id="confirmModalOverlay">
-  <div class="confirm-modal">
-    <div class="confirm-modal-icon" id="confirmModalIcon">
-      <svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
-        <line x1="12" y1="8" x2="12" y2="12" stroke="currentColor" stroke-width="2"/>
-        <line x1="12" y1="16" x2="12.01" y2="16" stroke="currentColor" stroke-width="2"/>
-      </svg>
-    </div>
-    <h2 class="confirm-modal-title" id="confirmModalTitle">Confirm Action</h2>
-    <p class="confirm-modal-message" id="confirmModalMessage">Are you sure?</p>
-    <div class="confirm-modal-actions">
-      <button class="btn-cancel" id="confirmModalCancel">Cancel</button>
-      <button class="btn-confirm" id="confirmModalOk">Confirm</button>
-    </div>
-  </div>
-</div>
-
-<!-- Add User Modal -->
-<div class="modal-overlay" id="addUserModal">
-  <div class="modal">
+<!-- GENERATE BRACKET -->
+<div class="modal-overlay" id="generateBracketModal">
+  <div class="modal" style="max-width:440px;">
     <div class="modal-header">
-      <div class="modal-header-title">Add New User</div>
-      <button class="modal-close" onclick="closeModal('addUserModal')">
-        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
+      <div class="modal-header-title" id="generateBracketModalTitle">Generate Bracket</div>
+      <button class="modal-close" onclick="closeModal('generateBracketModal')"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="modal-body">
-      <div class="form-control-2col">
-        <div class="form-row"><label>Full Name</label><input class="form-control" id="addName" type="text" placeholder="Juan dela Cruz"></div>
-        <div class="form-row"><label>Email Address</label><input class="form-control" id="addEmail" type="email" placeholder="juan@email.com"></div>
+      <div style="background:var(--gray-50);border-radius:10px;padding:12px 14px;border:1px solid var(--gray-200);margin-bottom:16px;font-size:12.5px;color:var(--gray-600);line-height:1.55;">
+        Teams will be randomly paired into Semi-Final matches. Once both Semi-Finals are confirmed, the <strong>Final match is automatically created</strong> — no manual step required. The loser of each match is eliminated.
       </div>
-      <div class="form-control-2col">
-        <div class="form-row"><label>Password</label><input class="form-control" id="addPassword" type="password" placeholder="Temporary password"></div>
-        <div class="form-row"><label>Phone Number</label><input class="form-control" id="addPhone" type="tel" placeholder="+501 600-0000"></div>
-      </div>
-      <div class="form-control-2col">
-        <div class="form-row">
-          <label>Assign Role</label>
-          <select class="form-control" id="addRole">
-            <option value="">Select role...</option>
-            <option>Admin</option>
-            <option>Organizer</option>
-            <option>Coach</option>
-            <option>Referee</option>
-            <option>Player</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <label>Account Status</label>
-          <select class="form-control" id="addStatus">
-            <option value="active">Active</option>
-            <option value="suspended">Suspended</option>
-            <option value="deactivated">Deactivated</option>
-          </select>
-        </div>
+      <div class="form-row"><label>Match Date *</label><input class="form-control" id="genBracketDate" type="date"></div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>Kick-off Time</label><input class="form-control" id="genBracketTime" type="time" value="10:00"></div>
+        <div class="form-row"><label>Venue (optional)</label><input class="form-control" id="genBracketVenue" type="text" placeholder="e.g. City Stadium"></div>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn-secondary" onclick="closeModal('addUserModal')">Cancel</button>
-      <button class="btn-primary" onclick="addUser()">
+      <button class="btn-secondary" onclick="closeModal('generateBracketModal')">Cancel</button>
+      <button class="btn-primary" onclick="doGenerateBracket()">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        Create User
+        Generate Matches
       </button>
     </div>
   </div>
 </div>
 
-<!-- Edit User Modal -->
-<div class="modal-overlay" id="editUserModal">
+<!-- CREATE TOURNAMENT -->
+<div class="modal-overlay" id="createTournamentModal">
   <div class="modal">
     <div class="modal-header">
-      <div class="modal-header-title">Edit User</div>
-      <button class="modal-close" onclick="closeModal('editUserModal')">
-        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
+      <div class="modal-header-title">New Tournament</div>
+      <button class="modal-close" onclick="closeModal('createTournamentModal')"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="modal-body">
-      <div class="form-control-2col">
-        <div class="form-row"><label>Full Name</label><input class="form-control" id="editName" type="text"></div>
-        <div class="form-row"><label>Email</label><input class="form-control" id="editEmail" type="email"></div>
-      </div>
-      <div class="form-control-2col">
-        <div class="form-row">
-          <label>Role</label>
-          <select class="form-control" id="editRole">
-            <option>Admin</option><option>Organizer</option><option>Coach</option><option>Referee</option><option>Player</option>
-          </select>
-        </div>
-        <div class="form-row">
-          <label>Status</label>
-          <select class="form-control" id="editStatus">
-            <option value="active">Active</option>
-            <option value="suspended">Suspended</option>
-            <option value="deactivated">Deactivated</option>
-          </select>
-        </div>
-      </div>
+      <div class="form-section-label">Basic Details</div>
       <div class="form-row">
-        <label>Reset Password (leave blank to keep current)</label>
-        <input class="form-control" type="password" placeholder="New password...">
+        <label>Tournament Name *</label>
+        <input class="form-control" id="ctName" type="text" placeholder="e.g. Summer League 2025">
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row">
+          <label>Tournament Format</label>
+          <select class="form-control" id="ctType" onchange="updateTeamCountInfo()">
+            <option value="league">League (Round Robin)</option>
+            <option value="knockout">Knockout (Elimination)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Team Count *</label>
+          <select class="form-control" id="ctTeamCount" onchange="updateTeamCountInfo()">
+            <option value="10">10 Teams</option>
+            <option value="12">12 Teams</option>
+            <option value="16" selected>16 Teams</option>
+            <option value="20">20 Teams</option>
+            <option value="32">32 Teams</option>
+          </select>
+        </div>
+      </div>
+      <div id="ctTeamCountInfo" style="background:var(--gray-50);border-radius:8px;padding:10px 12px;border:1px solid var(--gray-200);font-size:12px;color:var(--gray-600);margin-top:-8px;margin-bottom:8px;display:none;"></div>
+      <div class="form-row">
+        <label>Description</label>
+        <textarea class="form-control" id="ctDesc" rows="3" placeholder="Describe this tournament..." style="resize:vertical;"></textarea>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row">
+          <label>Division</label>
+          <select class="form-control" id="ctDivision">
+            <option value="Division 1">Division 1</option>
+            <option value="Division 2">Division 2</option>
+            <option value="Division 3">Division 3</option>
+            <option value="Youth">Youth</option>
+            <option value="Senior">Senior</option>
+            <option value="Women">Women</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Age Group</label>
+          <select class="form-control" id="ctAge">
+            <option value="U12">U12</option>
+            <option value="U14">U14</option>
+            <option value="U16">U16</option>
+            <option value="U18">U18</option>
+            <option value="U21">U21</option>
+            <option value="Senior" selected>Senior</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-section-label">Dates</div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>Start Date</label><input class="form-control" id="ctStart" type="date"></div>
+        <div class="form-row"><label>End Date</label><input class="form-control" id="ctEnd" type="date"></div>
+      </div>
+      <div class="form-section-label">Venue</div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>Venue Name</label><input class="form-control" id="ctVenue" type="text" placeholder="e.g. City Stadium"></div>
+        <div class="form-row"><label>Location / City</label><input class="form-control" id="ctLocation" type="text" placeholder="e.g. Belmopan, Belize"></div>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn-secondary" onclick="closeModal('editUserModal')">Cancel</button>
-      <button class="btn-primary" onclick="saveUser()">
+      <button class="btn-secondary" onclick="closeModal('createTournamentModal')">Cancel</button>
+      <button class="btn-primary" onclick="createTournament()">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        Create Tournament
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT TOURNAMENT -->
+<div class="modal-overlay" id="editTournamentModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-title">Edit Tournament</div>
+      <button class="modal-close" onclick="closeModal('editTournamentModal')"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-row"><label>Tournament Name</label><input class="form-control" id="editTName" type="text"></div>
+      <div class="form-row">
+        <label>Format</label>
+        <select class="form-control" id="editTType">
+          <option value="league">League (Round Robin)</option>
+          <option value="knockout">Knockout (Elimination)</option>
+        </select>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>Division</label>
+          <select class="form-control" id="editTDivision">
+            <option value="Division 1">Division 1</option>
+            <option value="Division 2">Division 2</option>
+            <option value="Division 3">Division 3</option>
+            <option value="Youth">Youth</option>
+            <option value="Senior">Senior</option>
+            <option value="Women">Women</option>
+          </select>
+        </div>
+        <div class="form-row"><label>Status</label>
+          <select class="form-control" id="editTStatus">
+            <option value="upcoming">Upcoming</option>
+            <option value="ongoing">Ongoing</option>
+            <option value="completed">Completed</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>Start Date</label><input class="form-control" id="editTStart" type="date"></div>
+        <div class="form-row"><label>End Date</label><input class="form-control" id="editTEnd" type="date"></div>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row"><label>Venue</label><input class="form-control" id="editTVenue" type="text" placeholder="Venue name"></div>
+        <div class="form-row"><label>Location</label><input class="form-control" id="editTLocation" type="text" placeholder="City, Country"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('editTournamentModal')">Cancel</button>
+      <button class="btn-primary" onclick="saveTournament()">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
         Save Changes
       </button>
@@ -753,41 +597,216 @@
   </div>
 </div>
 
-<!-- App Review Modal -->
-<div class="modal-overlay" id="reviewAppModal">
+<!-- SCHEDULE MATCH -->
+<div class="modal-overlay" id="scheduleMatchModal">
   <div class="modal">
     <div class="modal-header">
-      <div class="modal-header-title">Review Application</div>
-      <button class="modal-close" onclick="closeModal('reviewAppModal')">
-        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
+      <div class="modal-header-title">Schedule Match</div>
+      <button class="modal-close" onclick="closeModal('scheduleMatchModal')"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
     </div>
     <div class="modal-body">
-      <div style="background:var(--gray-50);border-radius:10px;padding:16px;border:1px solid var(--gray-200);margin-bottom:16px;">
-        <div class="user-cell" style="margin-bottom:10px;">
-          <div class="user-avatar" id="reviewAvatar" style="background:linear-gradient(135deg,var(--blue-main),var(--blue-light));border-radius:9px;width:40px;height:40px;font-size:15px;"></div>
-          <div class="user-info">
-            <div class="uname" id="reviewName">—</div>
-            <div class="uemail" id="reviewEmail">—</div>
-          </div>
+      <div class="form-row">
+        <label>Tournament</label>
+        <select class="form-control" id="scheduleMatchTournament">
+          <option value="">— Select Tournament —</option>
+        </select>
+      </div>
+      <div class="form-grid-2">
+        <div class="form-row">
+          <label>Home Team</label>
+          <select class="form-control" id="scheduleMatchHomeTeam">
+            <option value="">— Select Team —</option>
+          </select>
         </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;">
-          <span style="font-size:13px;color:var(--gray-500);">Requested Role:</span>
-          <span class="badge badge-pending" id="reviewRole">—</span>
+        <div class="form-row">
+          <label>Away Team</label>
+          <select class="form-control" id="scheduleMatchAwayTeam">
+            <option value="">— Select Team —</option>
+          </select>
         </div>
       </div>
-      <div class="form-row">
-        <label>Admin Notes</label>
-        <textarea class="form-control" id="reviewNotes" rows="3" placeholder="Add notes (optional)..." style="resize:vertical;"></textarea>
+      <div class="form-row" id="scheduleRoundRow" style="display:none;">
+        <label>Round / Stage</label>
+        <select class="form-control" id="scheduleMatchRound">
+          <option value="">— Select Round —</option>
+          <option value="Round of 32">Round of 32</option>
+          <option value="Round of 16">Round of 16</option>
+          <option value="Quarter-Finals">Quarter-Finals</option>
+          <option value="Semi-Finals">Semi-Finals</option>
+          <option value="Final">Final</option>
+        </select>
+      </div>
+      <div class="form-grid-3">
+        <div class="form-row"><label>Date</label><input class="form-control" id="scheduleMatchDate" type="date"></div>
+        <div class="form-row"><label>Time</label><input class="form-control" id="scheduleMatchTime" type="time"></div>
+        <div class="form-row"><label>Venue</label><input class="form-control" id="scheduleMatchVenue" type="text" placeholder="e.g. City Stadium"></div>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn-secondary" onclick="closeModal('reviewAppModal')">Cancel</button>
-      <button class="btn-primary" style="background:linear-gradient(135deg,#ef4444,#f97316);" onclick="submitReview('rejected')">
+      <button class="btn-secondary" onclick="closeModal('scheduleMatchModal')">Cancel</button>
+      <button class="btn-primary" onclick="scheduleMatch()">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        Schedule Match
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT MATCH -->
+<div class="modal-overlay" id="editMatchModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-title">Edit Match</div>
+      <button class="modal-close" onclick="closeModal('editMatchModal')"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid-2">
+        <div class="form-row"><label>Home Team</label><input class="form-control" id="editMatchHome" type="text" readonly></div>
+        <div class="form-row"><label>Away Team</label><input class="form-control" id="editMatchAway" type="text" readonly></div>
+      </div>
+      <div class="form-grid-3">
+        <div class="form-row"><label>Date</label><input class="form-control" id="editMatchDate" type="date"></div>
+        <div class="form-row"><label>Time</label><input class="form-control" id="editMatchTime" type="time"></div>
+        <div class="form-row"><label>Venue</label><input class="form-control" id="editMatchVenue" type="text"></div>
+      </div>
+      <div class="form-row">
+        <label>Status</label>
+        <select class="form-control" id="editMatchStatus">
+          <option value="scheduled">Scheduled</option>
+          <option value="played">Played</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="disputed">Disputed</option>
+        </select>
+      </div>
+      <div class="form-row" id="editMatchScoreRow" style="display:none;">
+        <label>Score</label>
+        <div class="form-grid-2">
+          <input class="form-control" id="editMatchHomeScore" type="number" min="0" placeholder="Home goals">
+          <input class="form-control" id="editMatchAwayScore" type="number" min="0" placeholder="Away goals">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('editMatchModal')">Cancel</button>
+      <button class="btn-primary" onclick="saveMatch()">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        Save Match
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD TOURNAMENT MANAGER -->
+<div class="modal-overlay" id="addManagerModal">
+  <div class="modal" style="max-width:480px;">
+    <div class="modal-header">
+      <div class="modal-header-title">Add Tournament Manager</div>
+      <button class="modal-close" onclick="closeModal('addManagerModal')"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <!-- Mode tabs -->
+      <div style="display:flex;gap:4px;margin-bottom:16px;background:var(--surface2,#f0f2f5);border-radius:8px;padding:4px;">
+        <button id="tmTabCreate" onclick="setTMModalMode('create')" style="flex:1;padding:7px;border-radius:6px;border:none;cursor:pointer;font-size:.82rem;font-weight:600;background:var(--primary,#4f46e5);color:#fff;">Create New</button>
+        <button id="tmTabAssign" onclick="setTMModalMode('assign')" style="flex:1;padding:7px;border-radius:6px;border:none;cursor:pointer;font-size:.82rem;font-weight:600;background:transparent;color:var(--text-muted,#666);">Assign Existing</button>
+      </div>
+
+      <!-- CREATE NEW section -->
+      <div id="tmCreateSection">
+        <div style="background:#eff6ff;border-radius:10px;padding:12px 14px;border:1px solid #bfdbfe;margin-bottom:16px;font-size:12.5px;color:#1e40af;line-height:1.55;">
+          A new user account will be created with the <strong>Tournament Manager</strong> role. A temporary password will be generated — share it with the manager so they can log in and access the tournament.
+        </div>
+        <div class="form-section-label">Manager Details</div>
+        <div class="form-grid-2">
+          <div class="form-row"><label>Full Name *</label><input class="form-control" id="tmFullName" type="text" placeholder="e.g. John Smith"></div>
+          <div class="form-row"><label>Email *</label><input class="form-control" id="tmEmail" type="email" placeholder="manager@email.com"></div>
+        </div>
+        <div class="form-row"><label>Phone (optional)</label><input class="form-control" id="tmPhone" type="text" placeholder="e.g. 555-1234"></div>
+        <div class="form-section-label">Tournament Assignment</div>
+        <div class="form-row">
+          <label>Assign to Tournament *</label>
+          <select class="form-control" id="tmTournament">
+            <option value="">— Select Tournament —</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ASSIGN EXISTING section -->
+      <div id="tmAssignSection" style="display:none;">
+        <div style="background:#f0fdf4;border-radius:10px;padding:12px 14px;border:1px solid #bbf7d0;margin-bottom:16px;font-size:12.5px;color:#166534;line-height:1.55;">
+          Choose an existing Tournament Manager account and assign them to an additional tournament.
+        </div>
+        <div class="form-row">
+          <label>Tournament Manager *</label>
+          <select class="form-control" id="tmExistingManagerSelect">
+            <option value="">— Select Manager —</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label>Assign to Tournament *</label>
+          <select class="form-control" id="tmAssignTournament">
+            <option value="">— Select Tournament —</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('addManagerModal')">Cancel</button>
+      <button class="btn-primary" id="tmModalSubmitBtn" onclick="submitTMModal()">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        <span id="tmModalSubmitLabel">Create &amp; Assign</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MATCH EVENTS -->
+<div class="modal-overlay" id="matchEventsModal">
+  <div class="modal" style="max-width:500px;">
+    <div class="modal-header">
+      <div class="modal-header-title">Match Events</div>
+      <button class="modal-close" onclick="closeModal('matchEventsModal')"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div style="text-align:center;margin-bottom:20px;">
+        <div style="font-size:16px;font-weight:700;color:var(--gray-700);margin-bottom:6px;" id="eventsMatchTitle">—</div>
+        <div style="font-size:48px;font-weight:700;color:var(--gray-800);line-height:1;" id="eventsScore">0 — 0</div>
+        <div style="font-size:12px;color:var(--gray-400);margin-top:6px;" id="eventsMatchMeta">—</div>
+      </div>
+      <div style="border-radius:10px;border:1px solid var(--gray-200);overflow:hidden;">
+        <div style="background:var(--gray-50);padding:10px 16px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-500);border-bottom:1px solid var(--gray-200);">Match Timeline</div>
+        <div id="eventsList"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('matchEventsModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ENROLLMENT NOTE -->
+<div class="modal-overlay" id="enrollNoteModal">
+  <div class="modal" style="max-width:440px;">
+    <div class="modal-header">
+      <div class="modal-header-title" id="enrollModalTitle">Review Enrollment</div>
+      <button class="modal-close" onclick="closeModal('enrollNoteModal')"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    </div>
+    <div class="modal-body">
+      <div style="background:var(--gray-50);border-radius:10px;padding:14px;border:1px solid var(--gray-200);margin-bottom:16px;">
+        <div style="font-size:14px;font-weight:700;color:var(--gray-800);" id="enrollModalTeam">—</div>
+        <div style="font-size:12px;color:var(--gray-400);margin-top:2px;" id="enrollModalTournament">—</div>
+      </div>
+      <div class="form-row">
+        <label>Organizer Notes (optional)</label>
+        <textarea class="form-control" id="enrollNoteText" rows="3" placeholder="Add a note for the coach..." style="resize:vertical;"></textarea>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeModal('enrollNoteModal')">Cancel</button>
+      <button class="btn-primary" style="background:linear-gradient(135deg,#ef4444,#f97316);" onclick="doEnrollDecision('rejected')">
         <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         Reject
       </button>
-      <button class="btn-primary" onclick="submitReview('approved')">
+      <button class="btn-primary" onclick="doEnrollDecision('approved')">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
         Approve
       </button>
@@ -795,7 +814,25 @@
   </div>
 </div>
 
+<!-- CONFIRM DIALOG -->
+<div id="confirmModalOverlay" class="modal-overlay" onclick="if(event.target.id === 'confirmModalOverlay') closeConfirmModal()">
+  <div class="modal" style="max-width:380px;text-align:center;background:#fff;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.14);overflow:hidden;">
+    <div style="padding:40px 30px;display:flex;flex-direction:column;align-items:center;">
+      <div id="confirmModalIcon" style="width:52px;height:52px;border-radius:50%;background:#fef3c7;color:#d97706;display:flex;align-items:center;justify-content:center;margin-bottom:20px;flex-shrink:0;">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <h5 style="font-weight:700;margin:0 0 12px 0;font-size:18px;color:#1e293b;" id="confirmModalTitle">Confirm</h5>
+      <p style="font-size:14px;color:#475569;line-height:1.6;margin:0 0 28px 0;" id="confirmModalMessage">Are you sure?</p>
+      <div style="display:flex;gap:10px;justify-content:center;width:100%;">
+        <button id="confirmModalCancel" class="btn-cancel">Cancel</button>
+        <button id="confirmModalOk" class="btn-confirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/js/session-helper.js"></script>
 <script src="script.js"></script>
+<script>SessionHelper.validateDashboardAccess('organizer');</script>
 </body>
 </html>
-
